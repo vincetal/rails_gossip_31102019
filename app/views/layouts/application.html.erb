@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TheGossipProject</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+    <!-- Ajout d'une navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <%= link_to "GOSSIPS!", root_path, class: "navbar-brand mb-0 h1" %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <%= link_to "Team", team_index_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item active">
+            <%= link_to "Contact", contacts_path, class: "nav-link" %>
+          </li>
+
+        </ul>
+        <% if logged_in?  %>
+          <%= link_to "Se déconnecter", session_path(session.id), method: :delete, class: "card-link btn btn-danger" %>
+        <% else  %>
+          <%= link_to "S'identifier", new_session_path, class: "card-link btn btn-link" %>
+          <%= link_to "creer un compte", new_user_path, class: "card-link btn btn-primary" %>
+        <% end  %>
+      </div>
+    </nav>
+
+
+
+    <!-- Centrer les contenus -->
+    <div class="container">
+      <%= yield %>
+    </div>
+
+
+  </body>
+</html>

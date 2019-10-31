@@ -1,0 +1,34 @@
+
+<!-- Affichage principal et des tous les gossips-->
+
+<div class="jumbotron">
+  <h1 class="display-4"><%= @welcome %>!</h1>
+  <p class="lead">Avant toute chose, saches que la curiosité est un mauvais défaut... Ceci dit, personne ne t'en tiendra rigueur ici 🤭🤭</p>
+  <hr class="my-4">
+  <p>N'hésite pas à partager tous les potins de THP </p>
+  <button type="button" class="btn btn-primary">
+    <%= link_to "Créer un potin", new_gossip_path, class:"text-decoration-none text-white" %>
+  </button>
+</div>
+
+
+<br>
+
+<% @gossips.each_with_index do |gossip,index| %>
+  <div class="card">
+    <div class="card-body">
+      <h5><%= link_to "#{gossip[:author]} (#{gossip[:city]})", user_path(gossip[:user_id]), class: "text-decoration-none card-title " %></h5>
+      <p class="card-text"><%= gossip[:title] %></p>
+      <!-- On propose les actions pertinentes en fonction du user -->
+      <% if is_this_the_logged_user?(gossip[:user_id]) %>
+        <%= link_to "consulter", gossip_path(gossip[:id]), class: "card-link btn btn-primary" %>
+        <%= link_to "modifier", edit_gossip_path(gossip[:id]), class: "card-link" %>
+        <%= link_to "Supprimer", gossip_path(gossip[:id]), class: "card-link btn btn-danger", data:{confirm:"êtes vous sûr?", method: "DELETE"} %>
+      <% else %>
+        <%= link_to "consulter", gossip_path(gossip[:id]), class: "card-link btn btn-primary" %>
+      <% end %>
+
+    </div>
+  </div>
+  <br>
+<% end %>

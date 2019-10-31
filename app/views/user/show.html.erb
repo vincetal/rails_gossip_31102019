@@ -1,0 +1,19 @@
+<!-- Carte pour un utilisateur -->
+<br><br>
+<div class="card mb-3" style="max-width: 540px;">
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <img src="https://images.pexels.com/photos/3115708/pexels-photo-3115708.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" class="card-img" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title"><%= @user.first_name %> <%= @user.last_name%></h5>
+        <p class="card-text">Description : <%= @user.description%></p>
+        <p class="card-text">email : <%= @user.email%></p>
+        <p class="card-text">age : <%= @user.age %></p>
+        <p class="card-text">Ville : <%= @city.name%></p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+      </div>
+    </div>
+  </div>
+</div>

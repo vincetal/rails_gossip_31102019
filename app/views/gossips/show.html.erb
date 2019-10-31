@@ -1,0 +1,33 @@
+<br>
+<p id="notice"><%= notice %></p>
+<div >
+  <h3>potin n°<%= @gossip[:id] %></h3>
+  <div class="card mb-3">
+
+    <div class="card-body">
+      <h5 class="card-title">
+        <%= link_to "#{@gossip[:author]} (#{@gossip[:city]})", user_path(@gossip[:user_id]), class: "text-decoration-none card-title " %>
+      </h5>
+
+      <p class="card-text"><%= @gossip[:title] %></p>
+      <p class="card-text"><%= @gossip[:content] %></p>
+      <p class="card-text"><small class="text-muted"><%= @gossip[:created_at] %></small></p>
+
+      <!-- On propose les actions pertinentes en fonction du user -->
+      <% if is_this_the_logged_user?(@gossip[:user_id]) %>
+        <button type="button" class="btn btn-primary">
+          <%= link_to "modifier ce potin", edit_gossip_path(@gossip[:id]), class:"text-decoration-none text-white" %>
+        </button>
+      <%= link_to "Supprimer", gossip_path(@gossip[:id]),class:"btn btn-danger", data:{confirm:"êtes vous sûr?", method: "DELETE"} %>
+      <% end %>
+      <%= link_to "retour à l'accueil", gossips_path, class: "card-link btn btn-primary" %>
+
+      <hr>
+      <%= render 'comments/index', {comments: @gossip_comments, gossip_id: @gossip[:id]}  %>
+      <br>
+      <hr>
+      <%= render 'comments/form',{comment: @gossip_comment} %>
+    </div>
+  </div>
+
+</div>
